@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+<!-- Esta pagina funciona para editar los tasks-->
+{% block content %}
+    
+    <main class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h1 class="text-secondary">{{task.title}}</h1>
+                {{error}}
+                <div class="mt-5.d-flex">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <button class="btn btn-dark">
+                        Update
+                        </button>
+                    </form>
+    
+                    <form action="{% url 'completed_task' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-secondary">
+                            Complete
+                        </button>
+                    </form>
+    
+                    <form action="{% url 'delete_task' task.id %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-dark">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+{% endblock content %}
+    
